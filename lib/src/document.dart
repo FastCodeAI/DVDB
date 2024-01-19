@@ -1,18 +1,20 @@
 import 'dart:math';
+import 'package:uuid/uuid.dart';
 
 class Document {
-  Document({String? id, required this.text, required this.embedding})
+  Document({String? id, required this.text, required this.embedding, Map<String, String>? metadata})
       : id = id ?? _generateUuid(),
-        magnitude = _calculateMagnitude(embedding);
+        magnitude = _calculateMagnitude(embedding),
+        metadata = metadata ?? Map<String, String>();
   
   final String id;
   final String text;
   final List<double> embedding;
   final double magnitude;
+  final Map<String, String> metadata;
 
   static String _generateUuid() {
-    // Implement UUID generation logic or use a third-party package
-    return "generated-uuid"; // Placeholder
+    return Uuid().v1();
   }
 
   static double _calculateMagnitude(List<double> embedding) {
@@ -25,15 +27,16 @@ class Document {
       'text': text,
       'embedding': embedding,
       'magnitude': magnitude,
+      'metadata': metadata,
     };
   }
 
-  // Implement fromJson if JSON deserialization is needed
   factory Document.fromJson(Map<String, dynamic> json) {
     return Document(
       id: json['id'],
       text: json['text'],
       embedding: List<double>.from(json['embedding']),
+      metadata: Map<String, String>.from(json['metadata'])
     );
   }
 }

@@ -2,11 +2,7 @@ import 'dart:convert';
 import 'dart:core';
 import 'dart:io';
 import 'dart:math';
-// ignore: unused_import
-import 'dart:typed_data';
 import 'package:uuid/uuid.dart';
-import 'package:path_provider/path_provider.dart';
-
 import 'document.dart';
 import 'search_result.dart';
 
@@ -18,12 +14,13 @@ class Collection {
   final String name;
   final Map<String, Document> documents = {};
 
-  void addDocument(String? id, String text, List<double> embedding) {
+  void addDocument(String? id, String text, List<double> embedding, Map<String, String>? metadata) {
     var uuid = Uuid();
     final Document document = Document(
       id: id ?? uuid.v1(),
       text: text,
       embedding: embedding,
+      metadata: metadata,
     );
 
     documents[document.id] = document;
@@ -47,7 +44,6 @@ class Collection {
 
     final List<SearchResult> similarities = <SearchResult>[];
     for (var document in documents.values) {
-      // print(document);
       final double magnitude = _calculateMagnitude(document.embedding);
       final double similarity = _cosineSimilarity(query, document.embedding, queryMagnitude, magnitude);
 
@@ -62,16 +58,16 @@ class Collection {
     return similarities.take(numResults).toList();
   }
 
-  void save() async {
-    final Directory tempDir =  await getTemporaryDirectory();
-    final File file = File('${tempDir.path}/$name.json');
+  void save() {
+    final String path = Directory.systemTemp.path;
+    final File file = File('./$name.json');
     final String encodedDocuments = json.encode(documents);
     file.writeAsString(encodedDocuments);
   }
 
-  void load() async {
-    final Directory tempDir =  await getTemporaryDirectory();
-    final File file = File('${tempDir.path}/$name.json');
+  void load() {
+    final String path = Directory.systemTemp.path;
+    final File file = File('./$name.json');
 
     if (!file.existsSync()) {
       print('File does not exist for collection $name, initializing with empty documents.');
@@ -79,9 +75,8 @@ class Collection {
       return;
     }
 
-    final String data = await file.readAsString();
+    final String data = file.readAsStringSync();
     final Map<String, dynamic> decodedData = json.decode(data) as Map<String, dynamic>;
-    // ignore: always_specify_types
     decodedData.forEach((key, value) {
       documents[key] = Document.fromJson(value);
     });
@@ -89,17 +84,10 @@ class Collection {
     print('Successfully loaded collection: $name');
   }
 
-  void clear({String? id}) {
-    if (id == null)
-    {
+  void clear() {
     documents.clear();
-    }
-    else {
-      documents.remove(id);
-    }
     save();
   }
-
 
   double _calculateMagnitude(List<double> vector) {
     return sqrt(vector.fold(0, (sum, element) => sum + element * element));
