@@ -11,12 +11,16 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+# VectorDB
+
+This package provides functionality to create vector database locally in dart for mobile devices. You can use OpenAI API to get the embedding of the input text. Alterntively, you can also create your own custom embeddings and insert that to the database instead as well. 
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Creates vectorDB locally, so no need to create and maintain a server
+- OpenAI Embedding support
+- Custom embedding support
+- Can be used for both android and iOS application development
 
 ## Getting started
 
@@ -25,11 +29,10 @@ start using the package.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+After setting up the codebase, you can use example/vector_db_example.dart file to test the working of the codebase. To run the script in command line, use the below command.
 
-```dart
-const like = 'sample';
+```
+dart example/vector_db_example.dart
 ```
 
 ## Additional information
