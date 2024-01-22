@@ -7,9 +7,7 @@ import 'document.dart';
 import 'search_result.dart';
 
 class Collection {
-  Collection(this.name){
-    load();
-  }
+  Collection(this.name);
 
   final String name;
   final Map<String, Document> documents = {};
@@ -24,19 +22,21 @@ class Collection {
     );
 
     documents[document.id] = document;
-    save();
+    _writeDocument(document);
   }
 
   void addDocuments(List<Document> docs) {
     for (final Document doc in docs) {
       documents[doc.id] = doc;
+      _writeDocument(doc);
     }
-    save();
   }
 
   void removeDocument(String id) {
-    documents.remove(id);
-    save();
+    if (documents.containsKey(id)) {
+      documents.remove(id);
+      _saveAllDocuments(); // Re-saving all documents after removal
+    }
   }
 
   List<SearchResult> search(List<double> query, {int numResults = 10, double? threshold}) {
@@ -58,35 +58,46 @@ class Collection {
     return similarities.take(numResults).toList();
   }
 
-  void save() {
-    final String path = Directory.systemTemp.path;
+  void _writeDocument(Document document) {
     final File file = File('./$name.json');
-    final String encodedDocuments = json.encode(documents);
-    file.writeAsString(encodedDocuments);
+    
+    var encodedDocument = json.encode(document.toJson());
+    file.writeAsStringSync('$encodedDocument\n', mode: FileMode.append);
+  }
+
+  void _saveAllDocuments() {
+    final File file = File('./$name.json');
+
+    file.writeAsStringSync(''); // Clearing the file
+    for (var document in documents.values) {
+      _writeDocument(document);
+    }
   }
 
   void load() {
-    final String path = Directory.systemTemp.path;
     final File file = File('./$name.json');
-
+    
     if (!file.existsSync()) {
       print('File does not exist for collection $name, initializing with empty documents.');
       documents.clear();
       return;
     }
 
-    final String data = file.readAsStringSync();
-    final Map<String, dynamic> decodedData = json.decode(data) as Map<String, dynamic>;
-    decodedData.forEach((key, value) {
-      documents[key] = Document.fromJson(value);
-    });
+    final lines = file.readAsLinesSync();
+
+    for (var line in lines) {
+      var decodedDocument = json.decode(line) as Map<String, dynamic>;
+      var document = Document.fromJson(decodedDocument);
+      documents[document.id] = document;
+    }
 
     print('Successfully loaded collection: $name');
   }
 
+
   void clear() {
     documents.clear();
-    save();
+    _saveAllDocuments();
   }
 
   double _calculateMagnitude(List<double> vector) {
