@@ -1,13 +1,19 @@
-import 'collection.dart';
-import 'errors.dart';
+
+import 'package:vector_db/src/collection.dart';
+import 'package:vector_db/vector_db.dart';
 
 class VectorDB {
   VectorDB._internal();
 
   static final VectorDB _shared = VectorDB._internal();
-  final Map<String, Collection> _collections = {};
+
+  // factory VectorDB() {
+  //   return _shared;
+  // }
 
   static VectorDB get shared => _shared;
+
+  final Map<String, Collection> _collections = {};
 
   Collection collection(String name) {
     if (_collections.containsKey(name)) {

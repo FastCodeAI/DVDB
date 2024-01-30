@@ -1,33 +1,29 @@
-import 'dart:math';
+import 'package:ml_linalg/linalg.dart';
 
 class MathFunctions {
-  static double cosineSimilarity(List<double> a, List<double> b, double magnitudeA, double magnitudeB) {
-    final double dotProduct = _dotProduct(a, b);
-    return dotProduct / (magnitudeA * magnitudeB);
+  MathFunctions._internal();
+
+  static final MathFunctions _shared = MathFunctions._internal();
+
+  factory MathFunctions() {
+    return _shared;
   }
 
-  static double euclideanDistance(List<double> a, List<double> b) {
-    final List<double> differences = _elementWiseSubtract(a, b);
-    final List<double> squaredDifferences = _elementWiseSquare(differences);
-    final double sumOfSquaredDifferences = squaredDifferences.reduce((double sum, double element) => sum + element);
-    return sqrt(sumOfSquaredDifferences);
-  }
+  double cosineSimilarity(List<double> a, List<double> b) {
+    assert(a.length == b.length);
 
-  static List<double> _elementWiseSubtract(List<double> a, List<double> b) {
-    final List<double> result = List<double>.generate(a.length, (int index) => a[index] - b[index]);
-    return result;
-  }
+    Vector aVector = Vector.fromList(a);
+    Vector bVector = Vector.fromList(b);
 
-  static List<double> _elementWiseSquare(List<double> a) {
-    final List<double> result = List<double>.generate(a.length, (int index) => a[index] * a[index]);
-    return result;
-  }
+    double dotProduct = aVector.dot(bVector);
 
-  static double _dotProduct(List<double> a, List<double> b) {
-    double result = 0.0;
-    for (int i = 0; i < a.length; i++) {
-      result += a[i] * b[i];
+    double aNorm = aVector.norm();
+    double bNorm = bVector.norm();
+
+    if (aNorm == 0 || bNorm == 0) {
+      return 0.0;
+    } else {
+      return dotProduct / (aNorm * bNorm);
     }
-    return result;
   }
 }
