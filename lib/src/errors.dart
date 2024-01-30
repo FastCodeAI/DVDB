@@ -1,4 +1,3 @@
-// Define the VectorDBError as an enum, similar to Swift's implementation.
 enum VectorDBError {
   collectionAlreadyExists,
 }
@@ -8,7 +7,6 @@ class CollectionError implements Exception {
 
   final String message;
 
-  // Named constructors for each error type
   factory CollectionError.fileNotFound() {
     return CollectionError._("File not found.");
   }
