@@ -13,7 +13,7 @@ class Collection {
   final String name;
   final Map<String, Document> documents = {};
 
-  void addDocument(String? id, String text, List<double> embedding, Map<String, String>? metadata) {
+  void addDocument(String? id, String text, List<double> embedding, {Map<String, String>? metadata}) {
     var uuid = Uuid();
     final Document document = Document(
       id: id ?? uuid.v1(),
@@ -79,7 +79,6 @@ class Collection {
     final File file = File('./$name.json');
     
     if (!file.existsSync()) {
-      print('File does not exist for collection $name, initializing with empty documents.');
       documents.clear();
       return;
     }
@@ -91,10 +90,7 @@ class Collection {
       var document = Document.fromJson(decodedDocument);
       documents[document.id] = document;
     }
-
-    print('Successfully loaded collection: $name');
   }
-
 
   void clear() {
     documents.clear();

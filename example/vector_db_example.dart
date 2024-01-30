@@ -11,7 +11,7 @@ void main() async {
     'Authorization': 'Bearer $openaiApiKey'
   };
 
-  var collection = VectorDB.shared.collection("Test");
+  var collection = VectorDB().collection("Test");
   
   var texts = ['cat', 'dog', 'lion'];
 

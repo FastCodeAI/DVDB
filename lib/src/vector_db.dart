@@ -7,11 +7,9 @@ class VectorDB {
 
   static final VectorDB _shared = VectorDB._internal();
 
-  // factory VectorDB() {
-  //   return _shared;
-  // }
-
-  static VectorDB get shared => _shared;
+  factory VectorDB() {
+     return _shared;
+  }
 
   final Map<String, Collection> _collections = {};
 
