@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:test/test.dart';
 import 'dart:io';
 import 'dart:convert';
@@ -13,16 +15,16 @@ void main() {
     });
 
     test('addDocument adds a document', () {
-      var document = Document(id: '1', text: 'Test', embedding: [1.0], metadata: {});
-      collection.addDocument(document.id, document.text, document.embedding, document.metadata);
+      var document = Document(id: '1', text: 'Test', embedding: Float64List.fromList([1.0]), metadata: {});
+      collection.addDocument(document.id, document.text, document.embedding, metadata: document.metadata);
 
       expect(collection.documents.containsKey(document.id), isTrue);
     });
 
     test('addDocuments adds multiple documents', () {
       var documents = [
-        Document(id: '1', text: 'Test 1', embedding: [1.0], metadata: {}),
-        Document(id: '2', text: 'Test 2', embedding: [2.0], metadata: {})
+        Document(id: '1', text: 'Test 1', embedding: Float64List.fromList([1.0]), metadata: {}),
+        Document(id: '2', text: 'Test 2', embedding: Float64List.fromList([2.0]), metadata: {})
       ];
       collection.addDocuments(documents);
 
@@ -30,8 +32,8 @@ void main() {
     });
 
     test('removeDocument removes a document', () {
-      var document = Document(id: '1', text: 'Test', embedding: [1.0], metadata: {});
-      collection.addDocument(document.id, document.text, document.embedding, document.metadata);
+      var document = Document(id: '1', text: 'Test', embedding: Float64List.fromList([1.0]), metadata: {});
+      collection.addDocument(document.id, document.text, document.embedding, metadata: document.metadata);
       collection.removeDocument(document.id);
 
       expect(collection.documents.containsKey(document.id), isFalse);
@@ -40,14 +42,14 @@ void main() {
     test('search returns correct results', () {
       // Setup: Adding some documents
       var documents = [
-        Document(id: '1', text: 'Dart programming', embedding: [1.0, 0.0], metadata: {}),
-        Document(id: '2', text: 'Flutter development', embedding: [0.0, 1.0], metadata: {}),
+        Document(id: '1', text: 'Dart programming', embedding: Float64List.fromList([1.0, 0.0]), metadata: {}),
+        Document(id: '2', text: 'Flutter development', embedding: Float64List.fromList([0.0, 1.0]), metadata: {}),
         // Add more documents as needed
       ];
       collection.addDocuments(documents);
 
       // Perform a search
-      var query = [0.5, 0.5]; // Define a query that matches your test case
+      var query = Float64List.fromList([0.5, 0.5]); // Define a query that matches your test case
       var searchResults = collection.search(query);
 
       // Assert: Check if the search results are as expected

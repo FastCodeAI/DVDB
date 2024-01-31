@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:core';
+import 'dart:ffi';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -15,7 +17,7 @@ class Collection {
   final String name;
   final Map<String, Document> documents = {};
 
-  void addDocument(String? id, String text, List<double> embedding, {Map<String, String>? metadata}) {
+  void addDocument(String? id, String text, Float64List embedding, {Map<String, String>? metadata}) {
     var uuid = Uuid();
     final Document document = Document(
       id: id ?? uuid.v1(),
@@ -42,7 +44,7 @@ class Collection {
     }
   }
 
-  List<SearchResult> search(List<double> query, {int numResults = 10, double? threshold}) {
+  List<SearchResult> search(Float64List query, {int numResults = 10, double? threshold}) {
 
     final List<SearchResult> similarities = <SearchResult>[];
     for (var document in documents.values) {

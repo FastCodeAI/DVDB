@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:typed_data';
 import 'package:uuid/uuid.dart';
 
 class Document {
@@ -9,7 +10,7 @@ class Document {
   
   final String id;
   final String text;
-  final List<double> embedding;
+  final Float64List embedding;
   final double magnitude;
   final Map<String, String> metadata;
 
@@ -17,7 +18,7 @@ class Document {
     return Uuid().v1();
   }
 
-  static double _calculateMagnitude(List<double> embedding) {
+  static double _calculateMagnitude(Float64List embedding) {
     return sqrt(embedding.fold(0, (num sum, double element) => sum + element * element));
   }
 
@@ -35,7 +36,7 @@ class Document {
     return Document(
       id: json['id'],
       text: json['text'],
-      embedding: List<double>.from(json['embedding']),
+      embedding: Float64List.fromList(json['embedding'].cast<double>()),
       metadata: Map<String, String>.from(json['metadata'])
     );
   }
