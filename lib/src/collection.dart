@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:core';
 import 'dart:io';
 
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 import 'package:vector_db/src/document.dart';
 import 'package:vector_db/src/math.dart';
@@ -57,8 +59,10 @@ class Collection {
     return similarities.take(numResults).toList();
   }
 
-  void _writeDocument(Document document) {
-    final File file = File('./$name.json');
+  Future<void> _writeDocument(Document document) async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, '$name.json');
+    final File file = File(path);
     
     var encodedDocument = json.encode(document.toJson());
     List<int> bytes = utf8.encode('$encodedDocument\n');
@@ -66,8 +70,10 @@ class Collection {
     file.writeAsBytesSync(bytes, mode: FileMode.append);
   }
 
-  void _saveAllDocuments() {
-    final File file = File('./$name.json');
+  Future<void> _saveAllDocuments() async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, '$name.json');
+    final File file = File(path);
 
     file.writeAsStringSync(''); // Clearing the file
     for (var document in documents.values) {
@@ -75,8 +81,10 @@ class Collection {
     }
   }
 
-  void load() {
-    final File file = File('./$name.json');
+  Future<void> load() async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, '$name.json');
+    final File file = File(path);
     
     if (!file.existsSync()) {
       documents.clear();
