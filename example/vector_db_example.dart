@@ -4,7 +4,7 @@ import 'package:vector_db/vector_db.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-const String openaiApiKey = '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'; // Replace with your OpenAI API key
+const String openaiApiKey = 'sk-your_api_key'; // Replace with your OpenAI API key
 const String openaiUrl = 'https://api.openai.com/v1/embeddings';
 
 void main() async {
