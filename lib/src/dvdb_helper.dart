@@ -1,13 +1,11 @@
+import 'package:dvdb/dvdb.dart';
 
-import 'package:vector_db/src/collection.dart';
-import 'package:vector_db/vector_db.dart';
+class DVDB {
+  DVDB._internal();
 
-class VectorDB {
-  VectorDB._internal();
+  static final DVDB _shared = DVDB._internal();
 
-  static final VectorDB _shared = VectorDB._internal();
-
-  factory VectorDB() {
+  factory DVDB() {
     return _shared;
   }
 

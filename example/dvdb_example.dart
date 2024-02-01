@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:vector_db/vector_db.dart';
+import 'package:dvdb/dvdb.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -13,7 +13,7 @@ void main() async {
     'Authorization': 'Bearer $openaiApiKey'
   };
 
-  var collection = VectorDB().collection("Test");
+  var collection = DVDB().collection("Test");
    
   var texts = ['cat', 'dog', 'lion'];
 

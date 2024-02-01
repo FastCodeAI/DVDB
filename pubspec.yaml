@@ -1,7 +1,6 @@
-name: vector_db
-description: A starting point for Dart libraries or applications.
+name: dvdb
+description: A dart based on-device vector database.
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
 
 environment:
   sdk: ^3.2.4
