@@ -1,24 +1,19 @@
 # Introducing VectorDB: The Pocket-Sized Powerhouse for Your Mobile Apps! 🚀
 
-Ever felt the frustration of juggling between different databases for iOS and Android? Fret no more! We embarked on a heroic quest to create a local vector database that feels right at home on both Android and iOS. Enter **VectorDB** - your go-to solution for maintaining harmony in the mobile development realm. 🌐✨
+The VectorDB repository provides functionality to create a vector database locally on a device. We were working on a use case that required us to create a privacy-preserving vector database. Therefore, we began searching for a local vector database. We found SVDB, which provides local vector database support for iOS-based applications. However, to the best of our knowledge, no such vector database existed for Android.
 
-Born out of the need for a universal solution, we stumbled upon [SVDB](https://github.com/Dripfarm/SVDB) while building an iOS app. It was like finding a needle in a haystack, but for Android, the haystack was, well, needle-less. So we rolled up our sleeves and brewed our own concoction. After much tinkering, testing, and a few coffee spills, VectorDB came to life! It's like the Swiss Army knife for your mobile apps, only cooler and without the risk of nicking your finger.
+One way to address this issue was to write a local vector database for Android similar to SVDB, but the main challenge in this scenario would be managing two different vector databases for both applications. Therefore, we considered writing a unified vector database that can work on both Android and iOS-based applications. In this repository, we have created a Dart-based VectorDB that can be used in Flutter-based applications.
 
-VectorDB is not just a database; it's a marvel in a class of its own. With its fluttering Dart wings, it seamlessly integrates into your mobile habitat. Need to make sense of your data? Just whisper sweet nothings to the OpenAI API, and it'll transform your input text into meaningful embeddings. More of a DIY enthusiast? Craft your own custom embeddings and let VectorDB embrace them with open arms.
+We have benchmarked the performance of our VectorDB against SVDB on the iPhone 14. Additionally, we have also presented results on an Android device to demonstrate that it works on both devices.
 
-We're not just sharing a tool; we're handing over a torch. VectorDB is now open-source because good things in life are meant to be shared, like pizza... or Wi-Fi passwords. So, if you're looking to amp up your app with some local vector database magic, VectorDB is your loyal companion. It's like having a mini superhero in your pocket, ready to leap into action at a moment's notice!
-
-Join us in this journey, contribute your genius, and let's make mobile development a tad more delightful, one vector at a time. 🌟
-
-Happy coding! 🎉✨
-
+Feel free to try it out, and we hope that it will meet your use case.
 
 ## VectorDB Highlights ✨
 
-- **No Server, No Cry**: VectorDB lives cozily on your device. Build your fortress of vectors without the hassle of server upkeep!
-- **OpenAI's Right Hand**: With OpenAI Embedding support, VectorDB is like having a data wizard by your side.
-- **Custom Embedding Wizardry**: Conjure up your own embeddings and watch VectorDB weave them into its magical data tapestry.
-- **Unity in Diversity**: Whether you're team Android or an iOS aficionado, VectorDB speaks your language, making app development a breezy affair.
+- **No Server, No Cry**: VectorDB runs locally on device. Build your vector db without the hassle of server upkeep!
+- **OpenAI's Embeddings Support**: Add OpenAI Embeddings in vectorDB in few lines of code.
+- **Custom Embeddings**: Create your own embeddings and add it in vectorDB instead of OpenAI embeddings.
+- **Multi-platform Support**: Whether you're team Android or team iOS, VectorDB works on both, making app development a breezy affair.
 
 
 ## Launch Your Journey with VectorDB 🚀
@@ -31,13 +26,13 @@ Happy coding! 🎉✨
 
 # VectorDB Quick Launch: Magic in Minutes! 🎩✨
 
-Feeling adventurous? After you've set up your codebase castle, it's time to unleash the dragon! Check out the `vector_db_example.dart` in our treasure chest to see VectorDB in action. Simply summon the script from the command line like a true code wizard:
+After you've set up your codebase, it's time to start using vectorDB! Check out the `vector_db_example.dart` in examples folder to see VectorDB in action. Simply run the script from the command line as mentioned below:
 
 ```bash
 dart example/vector_db_example.dart
 ```
 
-Want to make VectorDB your loyal sidekick in your Flutter project? Just whisper these magical incantations into your pubspec.yaml and behold as it joins your quest:
+Want to use VectorDB in your Flutter project? Just add the below command into your pubspec.yaml and start using it:
 
 ```
 vectorDB:
@@ -58,7 +53,6 @@ The following table shows the benchmarking results on SVDB as compared to vector
 |       100		  | 9.8013 | 0.0159 |
 |       500       | 277.903 | 0.04536 |
 
-
 #### Searching
 
 | # vectors in DB |    SVDB   |  vectorDB |
@@ -66,5 +60,21 @@ The following table shows the benchmarking results on SVDB as compared to vector
 |       100		  | 0.0349418 | 0.0159485 |
 |       500       | 0.0937644 | 0.0333472 |
 
+
+The following table shows the benchmarking results of vectorDB on android phone.
+
+#### Insertion over n documents
+
+| # vectors in DB | vectorDB |
+| --------------- | -------- |
+|       100		  | 0.264379 |
+|       500       | 0.891433 |
+
+#### Searching
+
+| # vectors in DB | vectorDB |
+| --------------- | -------- |
+|       100		  | 0.067309 |
+|       500       | 0.155228 |
 
 ##### Note: The time is in seconds.
