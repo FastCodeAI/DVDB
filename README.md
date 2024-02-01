@@ -29,7 +29,7 @@ We have benchmarked the performance of our DVDB against SVDB on the iPhone 14. A
 - **Step 1**: Install the Flutter SDK from the [official website](https://flutter.dev/docs/get-started/install).
 - **Step 2**: Set up your development environment with your favorite IDE, and install the Dart plugin.
 - **Step 3**: Run `flutter doctor` in your terminal to ensure everything is set up properly.
-- 
+
 ### Install our DVDB
 
 - **Step 4**: Run `git clone https://github.com/FastCodeAI/DVDB.git` 
