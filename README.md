@@ -3,7 +3,7 @@
 This DVDB repository provides functionality to create a vector database locally on a mobile device. 
 
 ## Why did we create this?
-We at (Fast Code AI)[https://fastcode.ai/] were working on a use case that required us to create privacy-preserving, on-device vector databases, ensuring that private user information never left their devices. So, we started searching for suitable on-device vector databases on the internet. We found (SVDB)[https://github.com/Dripfarm/SVDB], which provides on-device vector database support for iOS-based applications, and it worked well for our iOS application. However, we also needed one for Android. Alas, to the best of our knowledge, no such vector database existed for Android.
+We at [Fast Code AI](https://fastcode.ai/) were working on a use case that required us to create privacy-preserving, on-device vector databases, ensuring that private user information never left their devices. So, we started searching for suitable on-device vector databases on the internet. We found [SVDB](https://github.com/Dripfarm/SVDB), which provides on-device vector database support for iOS-based applications, and it worked well for our iOS application. However, we also needed one for Android. Alas, to the best of our knowledge, no such vector database existed for Android.
 
 
 ## Our solution
