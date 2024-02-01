@@ -1,5 +1,7 @@
 # Mobile-First DVDB (Dart Vector DB): The Pocket-Sized Powerhouse for Your Apps! 🚀
 
+![DVDB](assets/dvdb.png)
+
 This DVDB repository provides functionality to create a vector database locally on a mobile device. 
 
 ## Why did we create this?
