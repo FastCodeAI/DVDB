@@ -1,15 +1,14 @@
 import 'dart:convert';
 import 'dart:core';
-import 'dart:ffi';
 import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
-import 'package:vector_db/src/document.dart';
-import 'package:vector_db/src/math.dart';
-import 'package:vector_db/src/search_result.dart';
+import 'package:dvdb/src/document.dart';
+import 'package:dvdb/src/math.dart';
+import 'package:dvdb/src/search_result.dart';
 
 class Collection {
   Collection(this.name);

@@ -1,4 +1,4 @@
-name: vector_db
+name: dvdb
 description: A dart based on-device vector database.
 version: 1.0.0
 

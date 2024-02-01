@@ -1,4 +1,4 @@
-import 'package:vector_db/dvdb.dart';
+import 'package:dvdb/dvdb.dart';
 
 class DVDB {
   DVDB._internal();

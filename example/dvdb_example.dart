@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:vector_db/dvdb.dart';
+import 'package:dvdb/dvdb.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 

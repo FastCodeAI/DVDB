@@ -5,7 +5,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'dart:core';
 
-import 'package:vector_db/dvdb.dart';
+import 'package:dvdb/dvdb.dart';
 
 void main() {
   group('Collection', () {
