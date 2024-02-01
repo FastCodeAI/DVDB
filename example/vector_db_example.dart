@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:vector_db/vector_db.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -12,7 +14,7 @@ void main() async {
   };
 
   var collection = VectorDB().collection("Test");
-  
+   
   var texts = ['cat', 'dog', 'lion'];
 
   for (var text in texts) {
@@ -26,9 +28,9 @@ void main() async {
 
       if (response.statusCode == 200) {
         var jsonResponse = jsonDecode(response.body);
-        List<double> embedding = jsonResponse['data'][0]['embedding'].cast<double>();
+        Float64List embedding = jsonResponse['data'][0]['embedding'];
         print('Response from OpenAI: ${embedding.runtimeType}');
-        collection.addDocument(null, text, embedding, null);
+        collection.addDocument(null, text, embedding);
       } 
       else {
         print('Request failed with status: ${response.statusCode}.');
@@ -49,7 +51,7 @@ void main() async {
     var response = await http.post(Uri.parse(openaiUrl), headers: headers, body: requestBody);
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body);
-      List<double> embedding = jsonResponse['data'][0]['embedding'].cast<double>();
+      Float64List embedding = jsonResponse['data'][0]['embedding'];
 
       final query = collection.search(embedding, numResults: 1);
 
