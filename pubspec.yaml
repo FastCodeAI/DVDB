@@ -1,5 +1,5 @@
 name: vector_db
-description: A starting point for Dart libraries or applications.
+description: A dart based on-device vector database.
 version: 1.0.0
 # repository: https://github.com/my_org/my_repo
 

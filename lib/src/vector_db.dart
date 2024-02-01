@@ -1,6 +1,5 @@
 
 import 'package:vector_db/src/collection.dart';
-import 'package:vector_db/vector_db.dart';
 
 class VectorDB {
   VectorDB._internal();
