@@ -61,15 +61,15 @@ The following table shows the benchmarking results on SVDB as compared to DVDB o
 
 | # vectors in DB |  SVDB  | DVDB |
 | --------------- | ------ | --------- |
-|       100		  | 9.8013 | 0.0159 |
-|       500       | 277.903 | 0.04536 |
+|       100		  | 9801.3 | 15.9 |
+|       500       | 277903.0 | 45.36 |
 
 #### Searching
 
 | # vectors in DB |    SVDB   |  DVDB |
 | --------------- | --------- | --------- |
-|       100		  | 0.0349418 | 0.0159485 |
-|       500       | 0.0937644 | 0.0333472 |
+|       100		  | 34.9418 | 15.9485 |
+|       500       | 93.7644 | 33.3472 |
 
 
 The following table shows the benchmarking results of DVDB on android phone.
@@ -78,14 +78,14 @@ The following table shows the benchmarking results of DVDB on android phone.
 
 | # vectors in DB | DVDB |
 | --------------- | -------- |
-|       100		  | 0.264379 |
-|       500       | 0.891433 |
+|       100		  | 264.379 |
+|       500       | 891.433 |
 
 #### Searching
 
 | # vectors in DB | DVDB |
 | --------------- | -------- |
-|       100		  | 0.067309 |
-|       500       | 0.155228 |
+|       100		  | 67.309 |
+|       500       | 155.228 |
 
-##### Note: The time is in seconds.
+##### Note: The time is in miliseconds.
