@@ -56,6 +56,7 @@ DVDB:
 ### Benchmakring Results:
 
 The following table shows the benchmarking results on SVDB as compared to DVDB on iPhone 14.
+##### Note: The time is in miliseconds.
 
 #### Insertion over n documents
 
@@ -88,4 +89,4 @@ The following table shows the benchmarking results of DVDB on android phone.
 |       100		  | 67.309 |
 |       500       | 155.228 |
 
-##### Note: The time is in miliseconds.
+
