@@ -10,10 +10,10 @@ environment:
 dependencies:
   uuid: ^4.3.3
   path: ^1.8.0
-  http: ^0.13.3
+  http: ^1.1.0
   ml_linalg: ^13.12.2
   path_provider: ^2.1.2
 
 dev_dependencies:
-  lints: ^2.1.0
+  lints: ^3.0.0
   test: ^1.24.0
